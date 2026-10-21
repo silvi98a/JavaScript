@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Adivina el número</title>
+    <!--El título que aparece en la pestaña del navegador-->
+  </head>
+
+  <body>
+    <h1>Adivina el número</h1>
+    <!--Un encabezado de. Se muestra como título visible en la página.-->
+    <p id="resultado"></p>
+    <!--Un párrafo vacío con el identificador id="resultado".
+     Está vacío a propósito: es el "hueco" donde JavaScript escribirá
+     el mensaje final (si acertamos, cuántos intentos hacemos, o si cancelamos el juego),
+     usando document.getElementById("resultado").innerHTML = ..-->
+
+    <script src="./AdivinaNumero.js"></script>
+    <!--Carga y ejecuta el archivo JavaScript llamado AdivinaNumero.js, 
+    que debe estar en la misma carpeta que este HTML
+    (por eso ./ delante, que significa "la carpeta actual").-->
+  </body>
+</html>
