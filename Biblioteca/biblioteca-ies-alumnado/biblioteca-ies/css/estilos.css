@@ -1,0 +1,26 @@
+/* Estilos mínimos de partida. Puedes ampliarlos (requisito R8). */
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  color: #222;
+  background: #f7f7f5;
+}
+
+header {
+  background: #2f4858;
+  color: #fff;
+  padding: 1rem 2rem;
+}
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+section {
+  background: #fff;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
