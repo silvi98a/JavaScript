@@ -23,31 +23,33 @@
 Dos NaN no se consideran iguales, porque no son un valor concreto, solo “algo que salió mal”.
 NaN es el único valor que no es igual ni a sí mismo.
 
-
 ## A2. Analizar código
+
 1. ¿Qué muestra cada console.log? Ejecútalo después y compara.
-El primero muestra lo dentro de la función: 55.
-El segundo lo de fuera: 0.
+   El primero muestra lo dentro de la función: 55.
+   El segundo lo de fuera: 0.
 
 2. ¿Por qué total vale distinto dentro y fuera de la función?
-Porque hay dos variables distintas con el mismo nombre. Dentro de la función, let total crea una variable local que solo existe en esa función y anula a la global.
-La función modifica la local, y la global se queda en 0.
+   Porque hay dos variables distintas con el mismo nombre. Dentro de la función, let total crea una variable local que solo existe en esa función y anula a la global.
+   La función modifica la local, y la global se queda en 0.
 
 3. ¿Qué error produce la última línea y por qué?
-Al ser const, la variable descuento solo existe dentro de las llaves donde se declara. Fuera del if, descuento no existe.
+   Al ser const, la variable descuento solo existe dentro de las llaves donde se declara. Fuera del if, descuento no existe.
 
 4. ¿Qué cambia si dentro de la función sustituyes let total = … por total = …?
-Sin let, ya no se crea una variable local: la asignación modifica la total global
+   Sin let, ya no se crea una variable local: la asignación modifica la total global
 
 5. ¿Qué ocurre si añades gastosEnvio = 7; al final del programa?
-Si añades gastosEnvio = 7; al final, el programa da un error, porque gastosEnvio se declaró con const y una constante no se puede reasignar. El error es TypeError: Assignment to constant variable.
+   Si añades gastosEnvio = 7; al final, el programa da un error, porque gastosEnvio se declaró con const y una constante no se puede reasignar. El error es TypeError: Assignment to constant variable.
 
 ## A3. Decisiones y bucles: boletín de notas
+
 Aprobados: 6
 Media: 6.81
 Nota más alta: 10
 
 ## A4. Set y Map: lista de inscripciones
+
 Sin normalizar: 6
 Normalizados: 4
 ana@ies.es → 2
@@ -57,16 +59,42 @@ pablo@ies.es → 1
 [ 'ana@ies.es', 'luis@ies.es', 'marta@ies.es', 'pablo@ies.es' ]
 
 1. Usa un Set para obtener los correos sin repetir. ¿Cuántos salen? ¿Por qué no es el resultado que esperabas?
-Salen 6 correos. No es lo que esperaba (4) porque el Set compara los textos tal cual, y “ana@ies.es” y “ANA@ies.es” son strings distintos por las mayúsculas. Lo mismo pasa con “marta@ies.es” y “Marta@ies.es”. Solo se elimina el duplicado exacto “luis@ies.es”.
-
+   Salen 6 correos. No es lo que esperaba (4) porque el Set compara los textos tal cual, y “ana@ies.es” y “ANA@ies.es” son strings distintos por las mayúsculas. Lo mismo pasa con “marta@ies.es” y “Marta@ies.es”. Solo se elimina el duplicado exacto “luis@ies.es”.
 
 2. Repite el apartado normalizando antes cada correo a minúsculas (correo.toLowerCase()). ¿Cuántos salen ahora?
-Ahora salen 4. Al pasar cada correo a minúsculas con toLowerCase() antes de añadirlo, las variantes de ana y de marta pasan a ser el mismo texto y el Set solo guarda uno de cada.
-
+   Ahora salen 4. Al pasar cada correo a minúsculas con toLowerCase() antes de añadirlo, las variantes de ana y de marta pasan a ser el mismo texto y el Set solo guarda uno de cada.
 
 3. Usa un Map para contar cuántas veces aparece cada correo normalizado. Recórrelo y muestra luis@ies.es → 2.
-Recorro el array y, para cada correo normalizado, miro si ya está en el Map. Si está, le sumo 1 a su contador; si no, lo creo con valor 1. Después recorro el Map y muestro cada pareja, por ejemplo luis@ies.es → 2. El resultado es: ana 2, luis 2, marta 2 y pablo 1.
-
+   Recorro el array y, para cada correo normalizado, miro si ya está en el Map. Si está, le sumo 1 a su contador; si no, lo creo con valor 1. Después recorro el Map y muestro cada pareja, por ejemplo luis@ies.es → 2. El resultado es: ana 2, luis 2, marta 2 y pablo 1.
 
 4. Convierte el Set del apartado 2 en un array ordenado alfabéticamente.
-Convierto el Set del apartado 2 en array con el operador spread ([...unicosNorm]) y le aplico .sort(), que lo ordena alfabéticamente: ana, luis, marta, pablo.
+   Convierto el Set del apartado 2 en array con el operador spread ([...unicosNorm]) y le aplico .sort(), que lo ordena alfabéticamente: ana, luis, marta, pablo.
+
+## A5. Funciones y callbacks
+Apartado 4. Tienen en común que reciben una función y la aplican a cada elemento, devolviendo un array nuevo sin modificar el original.
+
+## A6. Depuración
+for (let i = 0; i <= notas.length; i++)
+Error: el bucle da una vuelta de más y lee una posición que no existe.
+Detectado: i llega a 5 y notas[i] es undefined.
+Corrección: i < notas.length
+
+if (notas[i] > 5)
+Error: el 5 también aprueba y con > se queda fuera.
+Detectado: con notas[i] = 5 la condición da false.
+Corrección: >= 5
+
+suma += notas[i];
+Error: el "7" es un string, así que en vez de sumar junta texto.
+Detectado: typeof suma cambia a "string".
+Corrección: const nota = Number(notas[i]); y usar nota
+
+return suma / notas.length;
+Error: divide entre todas las notas y no solo entre las aprobadas.
+Detectado: el resultado no da 7.17.
+Corrección: return suma / contador;
+
+Antes del return
+Error: si no hay aprobados, contador es 0 y sale NaN.
+Detectado: con [1, 2, 3] devuelve NaN.
+Corrección: if (contador === 0) return null;
