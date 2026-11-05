@@ -42,3 +42,31 @@ Sin let, ya no se crea una variable local: la asignación modifica la total glob
 5. ¿Qué ocurre si añades gastosEnvio = 7; al final del programa?
 Si añades gastosEnvio = 7; al final, el programa da un error, porque gastosEnvio se declaró con const y una constante no se puede reasignar. El error es TypeError: Assignment to constant variable.
 
+## A3. Decisiones y bucles: boletín de notas
+Aprobados: 6
+Media: 6.81
+Nota más alta: 10
+
+## A4. Set y Map: lista de inscripciones
+Sin normalizar: 6
+Normalizados: 4
+ana@ies.es → 2
+luis@ies.es → 2
+marta@ies.es → 2
+pablo@ies.es → 1
+[ 'ana@ies.es', 'luis@ies.es', 'marta@ies.es', 'pablo@ies.es' ]
+
+1. Usa un Set para obtener los correos sin repetir. ¿Cuántos salen? ¿Por qué no es el resultado que esperabas?
+Salen 6 correos. No es lo que esperaba (4) porque el Set compara los textos tal cual, y “ana@ies.es” y “ANA@ies.es” son strings distintos por las mayúsculas. Lo mismo pasa con “marta@ies.es” y “Marta@ies.es”. Solo se elimina el duplicado exacto “luis@ies.es”.
+
+
+2. Repite el apartado normalizando antes cada correo a minúsculas (correo.toLowerCase()). ¿Cuántos salen ahora?
+Ahora salen 4. Al pasar cada correo a minúsculas con toLowerCase() antes de añadirlo, las variantes de ana y de marta pasan a ser el mismo texto y el Set solo guarda uno de cada.
+
+
+3. Usa un Map para contar cuántas veces aparece cada correo normalizado. Recórrelo y muestra luis@ies.es → 2.
+Recorro el array y, para cada correo normalizado, miro si ya está en el Map. Si está, le sumo 1 a su contador; si no, lo creo con valor 1. Después recorro el Map y muestro cada pareja, por ejemplo luis@ies.es → 2. El resultado es: ana 2, luis 2, marta 2 y pablo 1.
+
+
+4. Convierte el Set del apartado 2 en un array ordenado alfabéticamente.
+Convierto el Set del apartado 2 en array con el operador spread ([...unicosNorm]) y le aplico .sort(), que lo ordena alfabéticamente: ana, luis, marta, pablo.

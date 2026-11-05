@@ -1,4 +1,3 @@
-
 console.log("5" + 3); // 53
 console.log("5" * 3); // 53 -> mal. da 15
 console.log("5" - "2"); // 52 -> mal. da 3
