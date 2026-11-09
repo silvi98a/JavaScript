@@ -1,3 +1,4 @@
+## PARTE A
 ## A1. Conversiones de tipos
 
 | Expresión | Mi predicción | Resultado real | Tipo (typeof) | Explicación |
@@ -98,3 +99,12 @@ Antes del return
 Error: si no hay aprobados, contador es 0 y sale NaN.
 Detectado: con [1, 2, 3] devuelve NaN.
 Corrección: if (contador === 0) return null;
+
+## PARTE B
+1. Consulta en MDN la página del elemento <script> y explica con tus palabras qué hacen los atributos defer y async. Indica en qué se diferencian.
+
+2. Haz la prueba: quita defer de los dos <script> de index.html, recarga la página y copia el error que aparece en la consola. ¿Por qué se produce?
+
+3. Vuelve a poner defer y cambia el orden de los scripts, de modo que app.js se cargue antes que datos.js. ¿Qué error aparece ahora y por qué?
+
+4. ¿Por qué defer es más adecuado que async en este proyecto? 
