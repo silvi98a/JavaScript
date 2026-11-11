@@ -24,3 +24,11 @@ section {
   padding: 1rem;
   margin-bottom: 1rem;
 }
+
+tr.prestado { /*para resaltar los que están prestados*/
+  background: #fdecea;
+}
+
+td {
+  padding: 4px 12px; /*para que salga la tabla centrada y no esté todo pegado*/
+}

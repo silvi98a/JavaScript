@@ -102,9 +102,35 @@ Corrección: if (contador === 0) return null;
 
 ## PARTE B
 1. Consulta en MDN la página del elemento <script> y explica con tus palabras qué hacen los atributos defer y async. Indica en qué se diferencian.
+defer: el script se ejecuta cuando el HTML ya está completamente leído. Si hay varios scripts con defer, se ejecutan en el mismo orden en que aparecen en el HTML.
+async: el script se ejecuta en cuanto termina de descargarse, aunque el HTML no esté leído del todo. Si hay varios, se ejecutan en el orden en que terminen de descargarse.
+La diferencia entre los dos es que defer garantiza que el DOM (estructura del documento HTML) esté listo y respeta el orden mientras que async no garantiza ninguna de las dos cosas.
 
 2. Haz la prueba: quita defer de los dos <script> de index.html, recarga la página y copia el error que aparece en la consola. ¿Por qué se produce?
+(Tengo capturas del ejemplo en el .pdf)
+Poniendo el siguiente código al final de apps.js 
+mostrar("#catalogo", "<p>Hola</p>");
+
+El error que sale:
+app.js:11 Uncaught TypeError: Cannot set properties of null (setting 'innerHTML')
+    at mostrar (app.js:11:46)
+    at app.js:63:1
+Se produce porque los scripts están en el head y, sin defer, el navegador los ejecuta nada más encontrarlos, antes de leer el body.
+
 
 3. Vuelve a poner defer y cambia el orden de los scripts, de modo que app.js se cargue antes que datos.js. ¿Qué error aparece ahora y por qué?
+(Tengo capturas del ejemplo en el .pdf)
+Con mi código actual no aparece ningún error, porque app.js todavía no usa LIBROS. Pero defer ejecuta los scripts en el orden en que están escritos, así que si app.js va antes que datos.js y usa LIBROS, saldrá ReferenceError: LIBROS is not defined.
+
 
 4. ¿Por qué defer es más adecuado que async en este proyecto? 
+Porque app.js necesita dos cosas: que LIBROS (que está en datos.js) ya exista y que la página esté leída para poder escribir en ella. defer asegura las dos, porque ejecuta los scripts en orden y solo cuando el HTML está listo.
+Con async el orden depende de qué archivo se haya descargue antes, y app.js podría ejecutarse sin LIBROS o sin los elementos de la página, así que fallaría.
+
+
+## Amplicación
+## Explicación toSorted() y Map.groupBy()
+
+toSorted(): Ordena el array sin romper nada. A diferencia de sort, este método crea una copia nueva ordenada y deja el array original intacto. Así no hay que duplicar arrays a mano para proteger los datos.
+
+Map.groupBy(): Agrupa elementos en un solo paso. En lugar de hacer un bucle (forEach) y comprobar manualmente si una categoría ya existe, este método clasifica todo el array automáticamente según el criterio que escojamos en una sola línea.
