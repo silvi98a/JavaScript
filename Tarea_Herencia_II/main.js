@@ -23,42 +23,63 @@ try {
 }
 
 // Funciones
-function mostrarInventario(lista) { // muestra cada equipo numerado con su tipo, su toString() y su precio
+function mostrarInventario(lista) {
+  // muestra cada equipo numerado con su tipo, su toString() y su precio
   lista.forEach((equipo, i) => {
-    console.log(`${i + 1}. [${equipo.tipo}] ${equipo.toString()} - ${equipo.precio().toFixed(2)} €`);
-  });                   //[${equipo.constructor.name}].  No puedo poner equipo.tipo () porque a un getter no se le llama como a una función
+    console.log(
+      `${i + 1}. [${equipo.tipo}] ${equipo.toString()} - ${equipo.precio().toFixed(2)} €`,
+    );
+  }); //[${equipo.constructor.name}].  No puedo poner equipo.tipo () porque a un getter no se le llama como a una función
 }
 
-function describir(equipo) { //muestra cada propiedad del equipo como "propiedad: valor"
-    for (const propiedad in equipo) {
-        console.log(`${propiedad}: ${equipo[propiedad]}`);
-    }
+function describir(equipo) {
+  //muestra cada propiedad del equipo como "propiedad: valor"
+  for (const propiedad in equipo) {
+    console.log(`${propiedad}: ${equipo[propiedad]}`);
+  }
 }
 
-function contarPortatiles(lista) { //cuenta los portátiles (las tablets cuentan si Tablet extiende Portatil)
-    return lista.filter(equipo => equipo instanceof Portatil).length;
+function contarPortatiles(lista) {
+  //cuenta los portátiles (las tablets cuentan si Tablet extiende Portatil)
+  return lista.filter((equipo) => equipo instanceof Portatil).length;
 }
 
-
-function contarSoloPortatiles(lista) { //cuenta solo los portátiles, sin tablets
-    return lista.filter(equipo => equipo.constructor === Portatil).length; //se compara clase con clase
+function contarSoloPortatiles(lista) {
+  //cuenta solo los portátiles, sin tablets
+  return lista.filter((equipo) => equipo.constructor === Portatil).length; //se compara clase con clase
   // también se puede: equipo.constructor.name === "Portatil" y aquí se compara texto con texto
 }
 
-function masCaro(lista) {// devuelve el equipo más caro
-    return lista.reduce((max, equipo) => (equipo.precio() > max.precio() ? equipo : max), lista[0]);
+function masCaro(lista) {
+  // devuelve el equipo más caro
+  return lista.reduce(
+    (max, equipo) => (equipo.precio() > max.precio() ? equipo : max),
+    lista[0],
+  );
 }
 
-function dentroDePresupuesto(lista, maximo) { // equipos que no superan el máximo, del más barato al más caro
-    return lista.filter(equipo => equipo.precio() <= maximo).sort(Ordenador.compararPorPrecio);
-}                                                         //.sort((a, b) => a.precio() - b.precio()); <- Lo que tenía antes puesto
+function dentroDePresupuesto(lista, maximo) {
+  // equipos que no superan el máximo, del más barato al más caro
+  return lista
+    .filter((equipo) => equipo.precio() <= maximo)
+    .sort(Ordenador.compararPorPrecio);
+} //.sort((a, b) => a.precio() - b.precio()); <- Lo que tenía antes puesto
 
-function totalPorMarca(lista) {//objeto con el importe total de cada marca: { HP: 1579.8, ... }
-    return lista.reduce((totales, equipo) => {totales[equipo.marca] = (totales[equipo.marca] || 0) + equipo.precio();    return totales;}, {});
+function totalPorMarca(lista) {
+  //objeto con el importe total de cada marca: { HP: 1579.8, ... }
+  return lista.reduce((totales, equipo) => {
+    totales[equipo.marca] = (totales[equipo.marca] || 0) + equipo.precio();
+    return totales;
+  }, {});
 }
 
-function ampliarRam(lista, clase, gb) { //suma gb a la RAM de los equipos de esa clase (o subclases)
-  lista.filter(equipo => equipo instanceof clase).forEach(equipo => {equipo.ram += gb;});
+function ampliarRam(lista, clase, gb) {
+  //suma gb a la RAM de los equipos de esa clase (o subclases)
+  lista
+    .filter((equipo) => equipo instanceof clase)
+    .forEach((equipo) => {
+      equipo.ram += gb;
+    });
 }
 
 const totales = totalPorMarca(inventario);
@@ -80,13 +101,12 @@ function contarPorTipo(lista) {
 console.log(contarPorTipo(inventario));
 console.log(ramMediaPorTipo(inventario));
 
-
-
 //devuelv la RAM media de cada clase: { Ordenador: 10, Portatil: 10, ... }
 function ramMediaPorTipo(lista) {
   const sumas = {};
   const conteo = contarPorTipo(lista);
-  lista.forEach(equipo => {sumas[equipo.tipo] = (sumas[equipo.tipo] || 0) + equipo.ram;
+  lista.forEach((equipo) => {
+    sumas[equipo.tipo] = (sumas[equipo.tipo] || 0) + equipo.ram;
   });
   const medias = {};
   for (const tipo in sumas) {
@@ -97,13 +117,15 @@ function ramMediaPorTipo(lista) {
 
 mostrarInventario(inventario);
 describir(inventario[0]);
-console.log("Portátiles:", contarPortatiles(inventario));          // 4
+console.log("Portátiles:", contarPortatiles(inventario)); // 4
 console.log("Solo portátiles:", contarSoloPortatiles(inventario)); // 2
 const caro = masCaro(inventario);
 console.log(`Más caro: ${caro.toString()} (${caro.precio().toFixed(2)} €)`); // Dell, 2828.00
-console.log("Hasta 700 €:", dentroDePresupuesto(inventario, 700).map(e => e.toString())); // 5, empieza Acer
+console.log(
+  "Hasta 700 €:",
+  dentroDePresupuesto(inventario, 700).map((e) => e.toString()),
+); // 5, empieza Acer
 ampliarRam(inventario, Portatil, 8);
-
 
 /*
 Parte 7 — Preguntas
