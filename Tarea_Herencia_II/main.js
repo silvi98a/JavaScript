@@ -75,10 +75,7 @@ function totalPorMarca(lista) {
 
 function ampliarRam(lista, clase, gb) {
   //suma gb a la RAM de los equipos de esa clase (o subclases)
-  lista
-    .filter((equipo) => equipo instanceof clase)
-    .forEach((equipo) => {
-      equipo.ram += gb;
+  lista.filter((equipo) => equipo instanceof clase).forEach((equipo) => {equipo.ram += gb;
     });
 }
 
@@ -90,11 +87,11 @@ for (const marca in totales) {
 //funciones de Ampliación
 // A3
 //devuelve cuántos equipos hay de cada clase: { Ordenador: 2, Portatil: 2, ... }
-function contarPorTipo(lista) {
+function contarPorTipo(lista) { // cuenta cuántos elementos hay de cada tipo en una lista y devuelve un objeto con el total
   return lista.reduce((conteo, equipo) => {
-    conteo[equipo.tipo] = (conteo[equipo.tipo] || 0) + 1;
+    conteo[equipo.tipo] = (conteo[equipo.tipo] || 0) + 1; // +1 para que no empiece en 0
     return conteo;
-  }, {});
+  }, {}); // devuelve una lista vacía
 }
 
 //compruebo que ejecutan bien las funciones de Ampliación
