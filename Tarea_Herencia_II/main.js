@@ -7,7 +7,7 @@ import { Gaming } from "./Gaming.js";
 const inventario = [
   new Ordenador("HP", "EliteDesk", 16, 1024, 24),
   new Ordenador("Acer", "Aspire"),
-  new Portatil("Apple", "MacBook Air"),
+  new Portatil("Apple", "MacBook Air"), // para acceder a esto -> inventario [2].marca o .modelo
   new Portatil("Lenovo", "Yoga", 16, 1024, 14, 10),
   new Tablet("Apple", "iPad", 8, 256, 11, 10, true),
   new Tablet("Samsung", "Galaxy Tab"),
@@ -26,10 +26,9 @@ try {
 function mostrarInventario(lista) {
   // muestra cada equipo numerado con su tipo, su toString() y su precio
   lista.forEach((equipo, i) => {
-    console.log(
-      `${i + 1}. [${equipo.tipo}] ${equipo.toString()} - ${equipo.precio().toFixed(2)} €`,
+    console.log(`${i + 1}. [${equipo.tipo}] ${equipo.toString()} - ${equipo.precio().toFixed(2)} €`,
     );
-  }); //[${equipo.constructor.name}].  No puedo poner equipo.tipo () porque a un getter no se le llama como a una función
+  }); //[${equipo.constructor.name}]. No puedo poner equipo.tipo () porque a un getter no se le llama como a una función
 }
 
 function describir(equipo) {
@@ -40,7 +39,7 @@ function describir(equipo) {
 }
 
 function contarPortatiles(lista) {
-  //cuenta los portátiles (las tablets cuentan si Tablet extiende Portatil)
+  //cuenta los portátiles. Las tablets cuentan si Tablet extiende Portatil.
   return lista.filter((equipo) => equipo instanceof Portatil).length;
 }
 
@@ -51,13 +50,10 @@ function contarSoloPortatiles(lista) {
 }
 
 function masCaro(lista) {
-  // devuelve el equipo más caro
-  return lista.reduce(
-    (max, equipo) => (equipo.precio() > max.precio() ? equipo : max),
-    lista[0],
-  );
-}
-
+  // devuelve el equipo más caro                                                        lista[0] es donde empieza a guardarse el primer elemento (viene del reduce)
+  return lista.reduce((max, equipo) => (equipo.precio() > max.precio() ? equipo : max), lista[0]); //no sería necesario poner lo de lista [0] porque si no hay nada, empieza por 0 por defecto.
+}                                                      // condición ? esVerdadero? : esFalso?
+                                                      // si es verdadero, actualiza el valor, si es falso, se queda con el actual.
 function dentroDePresupuesto(lista, maximo) {
   // equipos que no superan el máximo, del más barato al más caro
   return lista

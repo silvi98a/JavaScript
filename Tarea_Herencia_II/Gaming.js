@@ -1,7 +1,7 @@
 import { Ordenador } from "./Ordenador.js";
 export class Gaming extends Ordenador {
   constructor(marca, modelo, grafica, ram = 16, disco = 1024, pulgadas = 27) {
-    if (!grafica) {
+    if (!grafica) { // también se puede poner   if (typeof grafica !== "string" || grafica.trim() === "") {
       throw new Error("La tarjeta gráfica es obligatoria");
     }
 
