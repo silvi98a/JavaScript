@@ -1,0 +1,187 @@
+/*Adaptado el ejercicio de posicionamiento para este css del proyecto*/
+:root {
+  --color-primario: #3f5a3c;
+  --color-primario-claro: #e3e8df;
+  --color-acento: #b04a34;
+  --color-acento-hover: #96402d;
+  --color-fondo: #faf6ef;
+  --color-blanco: #ffffff;
+  --color-arena: #e7dfd1; /*declaro las variables --color y las llamo con var(--color..)*/
+  --color-borde: #ddd5c6;
+  --color-texto: #1f1f1c;
+  --color-texto-suave: #6b6b63;
+  --fuente-titulos: Georgia, "Times New Roman", serif; /* fuentes del sistema */
+  --fuente-texto: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box; /* el padding y el borde cuentan dentro del ancho */
+}
+
+p {
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--fuente-texto);
+  line-height: 1.5;
+}
+
+h1 {
+  margin: 0 0 0.5rem;
+  color: var(--color-primario);
+  font-family: var(--fuente-titulos);
+  font-size: 1.75rem;
+  line-height: 1.2;
+}
+
+h2 {
+  margin: 0 0 1rem;
+  color: var(--color-primario);
+  font-family: var(--fuente-titulos);
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+/* Cabecera con el índice, se queda fija arriba al hacer scroll */
+header {
+  position: sticky;
+  top: 0;
+  padding: 1rem 1.5rem 0;
+  background-color: var(--color-blanco);
+  border-bottom: 1px solid var(--color-borde);
+}
+
+/* Índice: enlaces en fila, saltan de línea si no caben */
+.indice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.5rem; /* 0 de separación vertical y 1.5 entre enlaces */
+}
+
+.indice a {
+  display: block;
+  padding: 0.5rem 0;
+  border-bottom: 3px solid transparent; /*transparente para que no se mueva al pasar el ratón*/
+  color: var(--color-texto);
+  font-size: 0.9rem;
+  text-decoration: none; /*quito lo que subraya*/
+}
+
+/*hover -> cuando pasas el ratón por encima; focus -> cuando se llega con el teclado*/
+.indice a:hover,
+.indice a:focus {
+  border-color: var(--color-acento);
+  color: var(--color-acento);
+}
+
+main {
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem; /*arriba 2.5, lados 1.5, abajo 4*/
+}
+
+/* Panel de estadísticas */
+.estadisticas {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 1.25rem;
+  background-color: var(--color-blanco);
+}
+
+.estadisticas h2 {
+  margin-bottom: 0.5rem;
+}
+
+.estadisticas h3 {
+  margin: 1rem 0 0;
+  font-size: 1rem;
+}
+
+.estadisticas ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+}
+
+/* Secciones */
+.secciones section {
+  margin-bottom: 2.5rem;
+  scroll-margin-top: 6rem; /* deja hueco para la cabecera fija al ir a un enlace */
+}
+
+/* Tarjetas: se reparten en fila y saltan de línea con flex-wrap */
+.tarjetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.tarjeta {
+  position: relative; /* para colocar la etiqueta dentro de la tarjeta */
+  width: 31%;
+  padding: 1.25rem;
+  border: 2px solid var(--color-borde);
+  border-radius: 1.25rem;
+  background-color: var(--color-blanco);
+}
+
+/*ampliar una funcionalidad: las tarjetas pares cambian de fondo*/
+.tarjeta:nth-child(even) {
+  background-color: var(--color-primario-claro);
+}
+
+.tarjeta:hover {
+  border-color: var(--color-texto-suave);
+}
+
+/* El color del borde cambia según el estado (la clase la pone JS) */
+.tarjeta.disponible {
+  border-color: var(--color-primario);
+}
+
+.tarjeta.prestado {
+  border-color: var(--color-acento);
+}
+
+/* Etiqueta "Prestado" en la esquina de la tarjeta */
+.etiqueta {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 62rem;
+  background-color: var(--color-acento);
+  color: var(--color-blanco);
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.tarjeta h3 {
+  margin: 0 0 0.25rem;
+  font-family: var(--fuente-titulos);
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+.autor {
+  margin-bottom: 0.75rem;
+  color: var(--color-acento);
+  font-size: 0.95rem;
+  font-weight: bold;
+}
+
+.datos {
+  color: var(--color-texto-suave);
+  font-size: 0.85rem;
+}
+
+footer {
+  padding: 1.5rem;
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+  text-align: center;
+}
